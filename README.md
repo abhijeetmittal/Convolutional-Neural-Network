@@ -427,9 +427,6 @@ model = load_vgg_model("pretrained-model/imagenet-vgg-verydeep-19.mat")
 To get the program to compute the content cost, we will now assign a_C and a_G to be the appropriate hidden layer activations. We will use layer conv4_2 to compute the content cost. The code below does the following:
 
 Assign the content image to be the input to the VGG model.
-Set a_C to be the tensor giving the hidden layer activation for layer "conv4_2".
-Set a_G to be the tensor giving the hidden layer activation for the same layer.
-Compute the content cost using a_C and a_G.
 
 # Assign the content image to be the input of the VGG model.  
 sess.run(model['input'].assign(content_image))
@@ -440,9 +437,6 @@ out = model['conv4_2']
 # Set a_C to be the hidden layer activation from the layer we have selected
 a_C = sess.run(out)
 ​
-# Set a_G to be the hidden layer activation from same layer. Here, a_G references model['conv4_2'] 
-# and isn't evaluated yet. Later in the code, we'll assign the image G as the model input, so that
-# when we run the session, this will be the activations drawn from the appropriate layer, with G as input.
 a_G = out
 ​
 # Compute the content cost
